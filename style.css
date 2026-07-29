@@ -10,3 +10,6 @@ h1 {
     color: #333;
     margin-top: 40px;
 }
+canvas {
+    border: 1px solid #999;
+}

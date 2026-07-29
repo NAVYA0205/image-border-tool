@@ -1,400 +1,505 @@
-*{
-    box-sizing:border-box;
-}
+// ==========================
+// ELEMENTS
+// ==========================
 
-body{
-    margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f4f6f9;
-}
+const upload = document.getElementById("upload");
+const preview = document.getElementById("preview");
+const count = document.getElementById("count");
 
-.container{
+const downloadAll = document.getElementById("downloadAll");
+const downloadZip = document.getElementById("downloadZip");
+const clearAll = document.getElementById("clearAll");
 
-    width:90%;
-    max-width:1300px;
+const brightnessSlider = document.getElementById("brightness");
+const contrastSlider = document.getElementById("contrast");
+const noiseSlider = document.getElementById("noise");
 
-    margin:30px auto;
+const brightnessValue = document.getElementById("brightnessValue");
+const contrastValue = document.getElementById("contrastValue");
+const noiseValue = document.getElementById("noiseValue");
 
-    background:#fff;
 
-    padding:30px;
+// ==========================
+// IMAGE ARRAY
+// ==========================
 
-    border-radius:15px;
+let images = [];
 
-    box-shadow:0 5px 25px rgba(0,0,0,.12);
 
-}
+// ==========================
+// SLIDER VALUE DISPLAY
+// ==========================
 
-h1{
+brightnessValue.innerHTML = brightnessSlider.value + "%";
+contrastValue.innerHTML = contrastSlider.value + "%";
+noiseValue.innerHTML = noiseSlider.value;
 
-    text-align:center;
 
-    font-size:42px;
+// ==========================
+// UPLOAD IMAGES
+// ==========================
 
-    margin-bottom:5px;
+upload.addEventListener("change", function(e){
 
-    color:#111827;
+    for(const file of e.target.files){
 
-}
+        processImage(file);
 
-.subtitle{
+    }
 
-    text-align:center;
+});
 
-    color:#64748b;
 
-    font-size:18px;
+// ==========================
+// LIVE PREVIEW
+// ==========================
 
-    margin-bottom:30px;
+brightnessSlider.addEventListener("input", updatePreview);
+contrastSlider.addEventListener("input", updatePreview);
+noiseSlider.addEventListener("input", updatePreview);
 
-}
 
-/* Upload */
+function updatePreview(){
 
-.upload-box{
+    brightnessValue.innerHTML =
+    brightnessSlider.value + "%";
 
-    height:230px;
+    contrastValue.innerHTML =
+    contrastSlider.value + "%";
 
-    border:2px dashed #2563eb;
+    noiseValue.innerHTML =
+    noiseSlider.value;
 
-    border-radius:12px;
+    images.forEach(function(obj){
 
-    background:#f8fbff;
+        drawProcessedImage(obj);
 
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-.upload-icon{
-
-    font-size:55px;
-
-    color:#2563eb;
-
-}
-
-.upload-box h2{
-
-    margin:10px;
-
-}
-
-.upload-box p{
-
-    margin:5px;
-
-    font-size:18px;
-
-}
-
-.upload-box span{
-
-    color:#64748b;
-
-}
-
-.upload-btn{
-
-    margin-top:18px;
-
-    background:#2563eb;
-
-    color:white;
-
-    padding:12px 28px;
-
-    border-radius:6px;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-}
-
-.upload-btn:hover{
-
-    background:#1d4ed8;
-
-}
-
-.upload-box small{
-
-    margin-top:12px;
-
-    color:#64748b;
+    });
 
 }
 
 
-/* Enhancement */
 
-.enhance-box{
+// ==========================
+// UPDATE COUNT
+// ==========================
 
-    margin-top:30px;
+function updateCount(){
 
-    background:#f8fbff;
-
-    border:1px solid #dbeafe;
-
-    border-radius:10px;
-
-    padding:20px;
-
-}
-
-.enhance-box h3{
-
-    margin-top:0;
-
-    margin-bottom:20px;
-
-}
-
-.enhance-box label{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-    margin:18px 0;
-
-    font-weight:600;
-
-}
-
-.enhance-box input[type=range]{
-
-    flex:1;
-
-    cursor:pointer;
-
-}
-
-.enhance-box span{
-
-    width:55px;
-
-    text-align:right;
-
-    color:#2563eb;
+    count.innerHTML =
+    images.length + " image(s) loaded";
 
 }
 
 
-/* Preview */
 
-.preview-header{
+// ==========================
+// RENUMBER FIGURES
+// ==========================
 
-    display:flex;
+function refreshFigureNumbers(){
 
-    justify-content:space-between;
+    images.forEach(function(obj){
 
-    align-items:center;
+        drawProcessedImage(obj);
 
-    margin-top:35px;
-
-}
-
-.preview-area{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:20px;
-
-    margin-top:15px;
+    });
 
 }
+// ==========================
+// PROCESS IMAGE
+// ==========================
 
-.card{
+function processImage(file){
 
-    width:390px;
+    let img = new Image();
 
-    border:1px solid #ddd;
+    img.onload = function(){
 
-    border-radius:10px;
+        let canvas = document.createElement("canvas");
 
-    background:white;
+        canvas.width = 1200;
+        canvas.height = 900;
 
-    padding:10px;
+        let obj = {
 
-    transition:.25s;
+            file: file,
+            canvas: canvas,
+            originalImage: img
 
-}
+        };
 
-.card:hover{
+        images.push(obj);
 
-    box-shadow:0 5px 18px rgba(0,0,0,.12);
+        drawProcessedImage(obj);
 
-}
+        createCard(obj);
 
-.card canvas{
+        updateCount();
 
-    width:100%;
+    };
 
-    display:block;
-
-    border-radius:5px;
-
-    border:1px solid #333;
-
-}
-
-.filename{
-
-    margin-top:10px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    font-size:14px;
-
-    word-break:break-all;
-
-}
-
-.delete{
-
-    cursor:pointer;
-
-    color:red;
-
-    font-size:22px;
+    img.src = URL.createObjectURL(file);
 
 }
 
 
-/* Buttons */
 
-.bottom-buttons{
+// ==========================
+// DRAW IMAGE
+// ==========================
 
-    margin-top:35px;
+function drawProcessedImage(obj){
 
-    display:flex;
+    let canvas = obj.canvas;
 
-    justify-content:center;
+    let ctx = canvas.getContext("2d");
 
-    gap:20px;
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
-    flex-wrap:wrap;
+
+
+    // White Background
+
+    ctx.fillStyle = "white";
+
+    ctx.fillRect(
+        0,
+        0,
+        1200,
+        900
+    );
+
+
+
+    let img = obj.originalImage;
+
+
+
+    // Leave bottom space for caption
+
+    const leftRightPadding = 80;
+
+    const topPadding = 80;
+
+    const bottomPadding = 140;
+
+
+
+    let availableWidth =
+    1200 - (leftRightPadding * 2);
+
+    let availableHeight =
+    900 - topPadding - bottomPadding;
+
+
+
+    let scale = Math.min(
+
+        availableWidth / img.width,
+
+        availableHeight / img.height
+
+    );
+
+
+
+    let w = img.width * scale;
+
+    let h = img.height * scale;
+
+
+
+    let x =
+    (1200 - w) / 2;
+
+    let y =
+    topPadding + (availableHeight - h) / 2;
+
+
+
+    // Brightness & Contrast
+
+    ctx.filter =
+
+    `brightness(${brightnessSlider.value}%)
+     contrast(${contrastSlider.value}%)`;
+
+
+
+    ctx.drawImage(
+
+        img,
+
+        x,
+
+        y,
+
+        w,
+
+        h
+
+    );
+
+
+
+    ctx.filter = "none";
+        // ==========================
+    // BLACK BORDER
+    // ==========================
+
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 8;
+
+    ctx.strokeRect(
+        4,
+        4,
+        1192,
+        892
+    );
+
+
+    // ==========================
+    // NOISE REDUCTION (OPTIONAL)
+    // ==========================
+
+    if (Number(noiseSlider.value) > 0) {
+
+        applyNoiseReduction(
+            canvas,
+            Number(noiseSlider.value)
+        );
+
+    }
+
+
+    // ==========================
+    // FIGURE CAPTION
+    // (INSIDE BORDER)
+    // ==========================
+
+    let figureNumber =
+        images.indexOf(obj) + 1;
+
+    ctx.fillStyle = "black";
+
+    ctx.font = "bold 28px Arial";
+
+    ctx.textAlign = "center";
+
+    ctx.textBaseline = "middle";
+
+    ctx.fillText(
+
+        "Figure " + figureNumber,
+
+        canvas.width / 2,
+
+        850
+
+    );
+
+}
+// ==========================
+// NOISE REDUCTION
+// ==========================
+
+function applyNoiseReduction(canvas, strength) {
+
+    let ctx = canvas.getContext("2d");
+
+    let imageData = ctx.getImageData(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    let data = imageData.data;
+
+    // Apply multiple passes based on slider value
+    for (let pass = 0; pass < strength; pass++) {
+
+        for (let i = 0; i < data.length; i += 4) {
+
+            let avg = (
+                data[i] +
+                data[i + 1] +
+                data[i + 2]
+            ) / 3;
+
+            data[i]     = data[i] * 0.75 + avg * 0.25;
+            data[i + 1] = data[i + 1] * 0.75 + avg * 0.25;
+            data[i + 2] = data[i + 2] * 0.75 + avg * 0.25;
+
+        }
+
+    }
+
+    ctx.putImageData(
+        imageData,
+        0,
+        0
+    );
 
 }
 
-button{
 
-    border:none;
 
-    border-radius:8px;
+// ==========================
+// CREATE PREVIEW CARD
+// ==========================
 
-    padding:14px 30px;
+function createCard(obj) {
 
-    font-size:16px;
+    let card = document.createElement("div");
 
-    cursor:pointer;
+    card.className = "card";
 
-    transition:.25s;
+    card.appendChild(obj.canvas);
 
-}
 
-button:hover{
 
-    transform:translateY(-2px);
+    let row = document.createElement("div");
 
-}
+    row.className = "filename";
 
-#downloadAll{
 
-    background:#2563eb;
 
-    color:white;
+    row.innerHTML = `
 
-}
+        <span>${obj.file.name}</span>
 
-#downloadZip{
+        <span class="delete">🗑</span>
 
-    background:#16a34a;
+    `;
 
-    color:white;
 
-}
 
-#clearAll{
+    row.querySelector(".delete").onclick = function () {
 
-    background:white;
+        images = images.filter(
+            image => image !== obj
+        );
 
-    color:#333;
+        card.remove();
 
-    border:1px solid #ccc;
+        updateCount();
 
-}
+        refreshFigureNumbers();
 
-.footer{
+    };
 
-    text-align:center;
 
-    margin-top:30px;
 
-    color:#64748b;
+    card.appendChild(row);
 
-    font-size:15px;
+    preview.appendChild(card);
 
 }
+// ==========================
+// DOWNLOAD ALL PNG
+// ==========================
+
+downloadAll.onclick = function () {
+
+    if (images.length === 0) {
+
+        alert("No images available.");
+
+        return;
+
+    }
+
+    images.forEach(function (obj, index) {
+
+        let a = document.createElement("a");
+
+        a.href = obj.canvas.toDataURL("image/png");
+
+        a.download = "Figure_" + (index + 1) + ".png";
+
+        a.click();
+
+    });
+
+};
 
 
-/* Responsive */
 
-@media(max-width:768px){
+// ==========================
+// DOWNLOAD ZIP
+// ==========================
 
-.card{
+downloadZip.onclick = async function () {
 
-    width:100%;
+    if (images.length === 0) {
 
-}
+        alert("No images available.");
 
-.preview-header{
+        return;
 
-    flex-direction:column;
+    }
 
-    gap:10px;
+    let zip = new JSZip();
 
-}
+    images.forEach(function (obj, index) {
 
-.enhance-box label{
+        let dataURL = obj.canvas.toDataURL("image/png");
 
-    flex-direction:column;
+        let imageData = dataURL.split(",")[1];
 
-    align-items:flex-start;
+        zip.file(
+            "Figure_" + (index + 1) + ".png",
+            imageData,
+            {
+                base64: true
+            }
+        );
 
-}
+    });
 
-.enhance-box span{
+    let content = await zip.generateAsync({
+        type: "blob"
+    });
 
-    width:auto;
+    let a = document.createElement("a");
 
-}
+    a.href = URL.createObjectURL(content);
 
-.bottom-buttons{
+    a.download = "PixPro_Images.zip";
 
-    flex-direction:column;
+    a.click();
 
-}
+};
 
-button{
 
-    width:100%;
 
-}
+// ==========================
+// CLEAR ALL
+// ==========================
 
-}
+clearAll.onclick = function () {
+
+    images = [];
+
+    preview.innerHTML = "";
+
+    upload.value = "";
+
+    updateCount();
+
+};
+
+
+
+// ==========================
+// INITIAL COUNT
+// ==========================
+
+updateCount();

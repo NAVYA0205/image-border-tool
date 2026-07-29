@@ -245,28 +245,6 @@ UPLOAD SECTION
 
 }
 
-
-.upload-icon{
-
-    width:55px;
-    height:55px;
-
-    background:#2563eb;
-
-    border-radius:50%;
-
-    margin:auto;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    font-size:28px;
-
-}
-
-
 .upload-box h2{
 
     margin:12px 0 5px;

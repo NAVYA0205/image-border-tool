@@ -48,23 +48,42 @@ ctx.fillRect(0,0,1200,900);
 
 
 
-let scale=Math.min(
-1200/img.width,
-900/img.height
+// White margin around image
+
+const padding = 80;   // increase this for more white space
+
+
+let availableWidth = 1200 - (padding * 2);
+let availableHeight = 900 - (padding * 2);
+
+
+
+let scale = Math.min(
+    availableWidth / img.width,
+    availableHeight / img.height
 );
 
 
 
-let w=img.width*scale;
-let h=img.height*scale;
-
-
-let x=(1200-w)/2;
-let y=(900-h)/2;
+let w = img.width * scale;
+let h = img.height * scale;
 
 
 
-ctx.drawImage(img,x,y,w,h);
+// Center image
+
+let x = (1200 - w) / 2;
+let y = (900 - h) / 2;
+
+
+
+ctx.drawImage(
+    img,
+    x,
+    y,
+    w,
+    h
+);
 
 
 

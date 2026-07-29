@@ -30,10 +30,10 @@ ctx.strokeStyle = "black";
 ctx.lineWidth = borderWidth;
 
 ctx.strokeRect(
-    0,
-    0,
-    canvas.width,
-    canvas.height
+    borderWidth / 2,
+    borderWidth / 2,
+    canvas.width - borderWidth,
+    canvas.height - borderWidth
 );
 
     };

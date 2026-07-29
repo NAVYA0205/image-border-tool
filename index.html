@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>PixPro</title>
 
@@ -12,12 +12,9 @@
 
 </head>
 
-
 <body>
 
-
 <div class="container">
-
 
 <h1>PixPro</h1>
 
@@ -26,34 +23,24 @@ Prepare professional images for documentation
 </p>
 
 
-
 <div class="upload-box">
-
 
 <div class="upload-icon">
 ⬆
 </div>
 
-
 <h2>Choose Images</h2>
 
+<p>Click or drag & drop images here</p>
 
-<p>
-Click or drag & drop images here
-</p>
-
-
-<span>
-You can select multiple files
-</span>
-
-
+<span>You can select multiple files</span>
 
 <label class="upload-btn">
 
 Select Files
 
-<input type="file" 
+<input
+type="file"
 id="upload"
 accept="image/*"
 multiple
@@ -61,47 +48,35 @@ hidden>
 
 </label>
 
-
-
 <small>
 JPG, PNG, GIF, BMP, WebP
 </small>
-
 
 </div>
 
 
 
-
-
-<!-- Live Image Enhancement -->
+<!-- Enhancement Controls -->
 
 <div class="enhance-box">
 
-
-<h3>
-Image Enhancement
-</h3>
-
+<h3>Image Enhancement</h3>
 
 
 <label>
 
 Brightness
 
-<input type="range"
+<input
+type="range"
 id="brightness"
 min="70"
 max="130"
 value="100">
 
-<span id="brightnessValue">
-100%
-</span>
+<span id="brightnessValue">100%</span>
 
 </label>
-
-
 
 
 
@@ -109,19 +84,16 @@ value="100">
 
 Contrast
 
-<input type="range"
+<input
+type="range"
 id="contrast"
 min="70"
 max="130"
 value="100">
 
-<span id="contrastValue">
-100%
-</span>
+<span id="contrastValue">100%</span>
 
 </label>
-
-
 
 
 
@@ -129,46 +101,40 @@ value="100">
 
 Noise Reduction
 
-<input type="range"
+<input
+type="range"
 id="noise"
 min="0"
 max="3"
 value="0">
 
-<span id="noiseValue">
-0
-</span>
+<span id="noiseValue">0</span>
 
 </label>
 
-
-
 </div>
-
 
 
 
 
 <div class="preview-header">
 
-
 <h3>
 Preview (4:3 Output)
 </h3>
-
 
 <span id="count">
 0 image(s) loaded
 </span>
 
-
 </div>
 
 
 
-
-
-<div id="preview" class="preview-area"></div>
+<div
+id="preview"
+class="preview-area">
+</div>
 
 
 
@@ -176,51 +142,34 @@ Preview (4:3 Output)
 
 <div class="bottom-buttons">
 
-
 <button id="downloadAll">
 ⬇ Download Images
 </button>
-
-
 
 <button id="downloadZip">
 📦 Download ZIP
 </button>
 
-
-
 <button id="clearAll">
 🗑 Clear All
 </button>
 
-
-
 </div>
-
-
 
 
 
 <p class="footer">
 
-Images are standardized to 4:3 format (1200 × 900 px) with white background, black border, and optional image enhancement.
+Images are standardized to 4:3 format (1200 × 900 px) with white background, black border and automatic figure captions.
 
 </p>
 
-
-
-
 </div>
-
-
-
-
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
 <script src="script.js"></script>
-
 
 </body>
 

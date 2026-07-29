@@ -4,25 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Border Tool</title>
+    <title>WI Image Formatter</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
-<div class="container">
+<body>
 
-    <h1>Image Border Tool</h1>
+    <div class="container">
 
-    <div class="controls">
+        <h1>WI Image Formatter</h1>
 
-        <label>White Margin (px)</label>
-        <input type="number" id="margin" value="40">
-
-        <label>Border Width (px)</label>
-        <input type="number" id="borderWidth" value="1">
+        <input type="file" id="upload" accept="image/*">
 
         <br><br>
 
-        <input type="file" id="upload" accept="image/*">
+        <canvas id="canvas"></canvas>
+
+        <br><br>
 
         <button id="download">
             Download Image
@@ -30,10 +28,8 @@
 
     </div>
 
-    <canvas id="canvas"></canvas>
+    <script src="script.js"></script>
 
-</div>
-
-<script src="script.js"></script>
+</body>
 
 </html>

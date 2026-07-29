@@ -228,7 +228,131 @@ UPLOAD SECTION
 }
 
 
+.upload-box{
 
+    width:600px;
+    margin:20px auto;
+
+    background:#ffffff;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+}
+
+
+.upload-icon{
+
+    width:55px;
+    height:55px;
+
+    background:#2563eb;
+
+    border-radius:50%;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:28px;
+
+}
+
+
+.upload-box h2{
+
+    margin:12px 0 5px;
+
+    font-size:24px;
+
+}
+
+
+.upload-box p{
+
+    margin:0 0 18px;
+
+    color:#555;
+
+}
+
+
+.upload-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+}
+
+
+.upload-btn{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:12px 25px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+.upload-btn:hover{
+
+    background:#1749c6;
+
+}
+
+
+.upload-btn input{
+
+    display:none;
+
+}
+
+
+.formats{
+
+    margin-top:15px;
+
+}
+
+
+.formats span{
+
+    display:inline-block;
+
+    padding:5px 14px;
+
+    margin:3px;
+
+    border-radius:20px;
+
+    border:1px solid #dbe4ff;
+
+    color:#2563eb;
+
+    font-size:13px;
+
+}
 /* FORMAT TAGS */
 
 

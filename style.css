@@ -136,15 +136,17 @@ h1{
 
 .enhance-box{
 
-    margin-top:30px;
+    margin:25px auto;
 
-    background:#f8fbff;
+    width:420px;
 
-    border:1px solid #dbeafe;
+    background:#fafcff;
 
-    border-radius:10px;
+    border:1px solid #e5e7eb;
 
-    padding:20px;
+    border-radius:8px;
+
+    padding:16px 20px;
 
 }
 
@@ -162,17 +164,19 @@ h1{
 
     align-items:center;
 
-    gap:15px;
+    justify-content:space-between;
 
-    margin:18px 0;
+    margin:12px 0;
 
-    font-weight:600;
+    font-size:14px;
+
+    font-weight:500;
 
 }
 
 .enhance-box input[type=range]{
 
-    flex:1;
+    width:180px;
 
     cursor:pointer;
 
@@ -180,11 +184,13 @@ h1{
 
 .enhance-box span{
 
-    width:55px;
+    width:42px;
 
     text-align:right;
 
-    color:#2563eb;
+    color:#6b7280;
+
+    font-size:13px;
 
 }
 

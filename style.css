@@ -208,7 +208,6 @@ cursor:pointer;
 .bottom-buttons{
 
 text-align:center;
-
 margin-top:30px;
 
 }
@@ -229,9 +228,21 @@ cursor:pointer;
 
 margin:10px;
 
+transition:0.3s;
+
 }
 
 
+
+button:hover{
+
+transform:translateY(-2px);
+
+}
+
+
+
+/* Download button */
 
 #downloadAll{
 
@@ -243,22 +254,26 @@ color:white;
 
 
 
+/* ZIP button */
+
+#downloadZip{
+
+background:#16a34a;
+
+color:white;
+
+}
+
+
+
+/* Clear button */
+
 #clearAll{
 
 background:white;
 
 border:1px solid #ccc;
 
-}
-
-
-
-.footer{
-
-text-align:center;
-
-color:#718096;
-
-margin-top:25px;
+color:#333;
 
 }

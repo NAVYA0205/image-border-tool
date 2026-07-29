@@ -37,13 +37,16 @@ Prepare professional images for documentation
 
 <h2>Choose Images</h2>
 
+
 <p>
 Click or drag & drop images here
 </p>
 
+
 <span>
 You can select multiple files
 </span>
+
 
 
 <label class="upload-btn">
@@ -59,6 +62,7 @@ hidden>
 </label>
 
 
+
 <small>
 JPG, PNG, GIF, BMP, WebP
 </small>
@@ -68,7 +72,70 @@ JPG, PNG, GIF, BMP, WebP
 
 
 
+
+<!-- Image Enhancement Controls -->
+
+<div class="enhance-box">
+
+
+<h3>
+Image Enhancement
+</h3>
+
+
+
+<label>
+
+Brightness
+
+<input type="range" 
+id="brightness"
+min="70"
+max="130"
+value="100">
+
+</label>
+
+
+
+
+<label>
+
+Contrast
+
+<input type="range" 
+id="contrast"
+min="70"
+max="130"
+value="100">
+
+</label>
+
+
+
+
+<label>
+
+Noise Reduction
+
+<input type="range"
+id="noise"
+min="0"
+max="3"
+value="0">
+
+</label>
+
+
+
+</div>
+
+
+
+
+
 <div class="preview-header">
+
 
 <h3>
 Preview (4:3 Output)
@@ -84,16 +151,21 @@ Preview (4:3 Output)
 
 
 
+
+
 <div id="preview" class="preview-area"></div>
+
 
 
 
 
 <div class="bottom-buttons">
 
+
 <button id="downloadAll">
 ⬇ Download Images
 </button>
+
 
 
 <button id="downloadZip">
@@ -101,26 +173,40 @@ Preview (4:3 Output)
 </button>
 
 
+
 <button id="clearAll">
 🗑 Clear All
 </button>
 
+
+
 </div>
+
+
+
 
 <p class="footer">
 
-Images are standardized to 4:3 format (1200 × 900 px) with a clean white background and black border.
+Images are standardized to 4:3 format (1200 × 900 px) with white background, black border, and optional quality enhancement.
 
 </p>
 
 
+
+
 </div>
+
+
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
+
 <script src="script.js"></script>
 
+
 </body>
+
 
 </html>

@@ -12,10 +12,26 @@ upload.addEventListener("change", function (event) {
 
     img.onload = function () {
 
-        canvas.width = img.width;
-        canvas.height = img.height;
+        const margin = 40;
 
-        ctx.drawImage(img, 0, 0);
+canvas.width = img.width + margin * 2;
+canvas.height = img.height + margin * 2;
+
+// Fill the entire canvas with white
+ctx.fillStyle = "white";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+// Draw the image in the center
+ctx.drawImage(img, margin, margin);
+        ctx.strokeStyle = "black";
+ctx.lineWidth = 1;
+
+ctx.strokeRect(
+    margin,
+    margin,
+    img.width,
+    img.height
+);
 
     };
 

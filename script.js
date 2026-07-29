@@ -26,11 +26,14 @@ ctx.drawImage(img, margin, margin);
         ctx.strokeStyle = "black";
 ctx.lineWidth = 1;
 
+ctx.strokeStyle = "black";
+ctx.lineWidth = borderWidth;
+
 ctx.strokeRect(
-    margin,
-    margin,
-    img.width,
-    img.height
+    0,
+    0,
+    canvas.width,
+    canvas.height
 );
 
     };

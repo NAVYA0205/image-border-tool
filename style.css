@@ -404,3 +404,27 @@ button{
 }
 
 }
+.caption-input{
+
+    width:100%;
+
+    margin-top:10px;
+
+    padding:8px 10px;
+
+    border:1px solid #ddd;
+
+    border-radius:6px;
+
+    font-size:14px;
+
+    outline:none;
+
+}
+
+
+.caption-input:focus{
+
+    border-color:#2563eb;
+
+}

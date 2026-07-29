@@ -1,3 +1,4 @@
+const downloadZip=document.getElementById("downloadZip");
 const upload=document.getElementById("upload");
 const preview=document.getElementById("preview");
 const count=document.getElementById("count");
@@ -226,5 +227,67 @@ images=[];
 preview.innerHTML="";
 
 updateCount();
+
+}
+downloadZip.onclick = async function(){
+
+
+if(images.length===0){
+
+alert("No images available");
+
+return;
+
+}
+
+
+let zip = new JSZip();
+
+
+
+for(let i=0;i<images.length;i++){
+
+
+let dataURL = images[i].canvas.toDataURL("image/png");
+
+
+let imageData = dataURL.split(",")[1];
+
+
+zip.file(
+"WI_Image_"+(i+1)+".png",
+imageData,
+{
+base64:true
+}
+
+);
+
+
+}
+
+
+
+zip.generateAsync({
+type:"blob"
+})
+
+.then(function(content){
+
+
+let a=document.createElement("a");
+
+
+a.href=URL.createObjectURL(content);
+
+
+a.download="WI_Images.zip";
+
+
+a.click();
+
+
+});
+
 
 }

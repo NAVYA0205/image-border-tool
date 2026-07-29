@@ -1,683 +1,400 @@
-const upload = document.getElementById("upload");
-const preview = document.getElementById("preview");
-const count = document.getElementById("count");
+*{
+    box-sizing:border-box;
+}
 
-const downloadAll = document.getElementById("downloadAll");
-const downloadZip = document.getElementById("downloadZip");
-const clearAll = document.getElementById("clearAll");
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f6f9;
+}
 
+.container{
 
-const brightnessSlider = document.getElementById("brightness");
-const contrastSlider = document.getElementById("contrast");
-const noiseSlider = document.getElementById("noise");
+    width:90%;
+    max-width:1300px;
 
+    margin:30px auto;
 
-const brightnessValue = document.getElementById("brightnessValue");
-const contrastValue = document.getElementById("contrastValue");
-const noiseValue = document.getElementById("noiseValue");
+    background:#fff;
 
+    padding:30px;
 
+    border-radius:15px;
 
-let images = [];
+    box-shadow:0 5px 25px rgba(0,0,0,.12);
 
+}
 
+h1{
 
+    text-align:center;
 
-// Upload images
+    font-size:42px;
 
-upload.addEventListener("change", function(e){
+    margin-bottom:5px;
 
+    color:#111827;
 
-for(let file of e.target.files){
+}
 
-processImage(file);
+.subtitle{
+
+    text-align:center;
+
+    color:#64748b;
+
+    font-size:18px;
+
+    margin-bottom:30px;
+
+}
+
+/* Upload */
+
+.upload-box{
+
+    height:230px;
+
+    border:2px dashed #2563eb;
+
+    border-radius:12px;
+
+    background:#f8fbff;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.upload-icon{
+
+    font-size:55px;
+
+    color:#2563eb;
+
+}
+
+.upload-box h2{
+
+    margin:10px;
+
+}
+
+.upload-box p{
+
+    margin:5px;
+
+    font-size:18px;
+
+}
+
+.upload-box span{
+
+    color:#64748b;
+
+}
+
+.upload-btn{
+
+    margin-top:18px;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:12px 28px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.upload-btn:hover{
+
+    background:#1d4ed8;
+
+}
+
+.upload-box small{
+
+    margin-top:12px;
+
+    color:#64748b;
 
 }
 
 
-});
+/* Enhancement */
 
+.enhance-box{
 
+    margin-top:30px;
 
+    background:#f8fbff;
 
+    border:1px solid #dbeafe;
 
-function processImage(file){
+    border-radius:10px;
 
+    padding:20px;
 
-let img = new Image();
+}
 
+.enhance-box h3{
 
+    margin-top:0;
 
-img.onload = function(){
+    margin-bottom:20px;
 
+}
 
+.enhance-box label{
 
-let canvas = document.createElement("canvas");
+    display:flex;
 
-canvas.width = 1200;
+    align-items:center;
 
-canvas.height = 900;
+    gap:15px;
 
+    margin:18px 0;
 
+    font-weight:600;
 
-let obj = {
+}
 
-file:file,
+.enhance-box input[type=range]{
 
-canvas:canvas,
+    flex:1;
 
-originalImage:img
+    cursor:pointer;
 
-};
+}
 
+.enhance-box span{
 
+    width:55px;
 
-images.push(obj);
+    text-align:right;
 
-
-
-drawProcessedImage(obj);
-
-
-
-createCard(obj);
-
-
-
-updateCount();
-
-
+    color:#2563eb;
 
 }
 
 
+/* Preview */
 
-img.src = URL.createObjectURL(file);
+.preview-header{
 
+    display:flex;
 
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:35px;
+
+}
+
+.preview-area{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+
+    margin-top:15px;
+
+}
+
+.card{
+
+    width:390px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    background:white;
+
+    padding:10px;
+
+    transition:.25s;
+
+}
+
+.card:hover{
+
+    box-shadow:0 5px 18px rgba(0,0,0,.12);
+
+}
+
+.card canvas{
+
+    width:100%;
+
+    display:block;
+
+    border-radius:5px;
+
+    border:1px solid #333;
+
+}
+
+.filename{
+
+    margin-top:10px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    font-size:14px;
+
+    word-break:break-all;
+
+}
+
+.delete{
+
+    cursor:pointer;
+
+    color:red;
+
+    font-size:22px;
 
 }
 
 
+/* Buttons */
 
+.bottom-buttons{
 
+    margin-top:35px;
 
+    display:flex;
 
+    justify-content:center;
 
+    gap:20px;
 
-// Draw processed preview
+    flex-wrap:wrap;
 
-function drawProcessedImage(obj){
+}
 
+button{
 
-let canvas = obj.canvas;
+    border:none;
 
-let ctx = canvas.getContext("2d");
+    border-radius:8px;
 
+    padding:14px 30px;
 
+    font-size:16px;
 
-ctx.clearRect(
-0,
-0,
-1200,
-900
-);
+    cursor:pointer;
 
+    transition:.25s;
 
+}
 
-// White background
+button:hover{
 
-ctx.fillStyle="white";
+    transform:translateY(-2px);
 
-ctx.fillRect(
-0,
-0,
-1200,
-900
-);
+}
 
+#downloadAll{
 
+    background:#2563eb;
 
+    color:white;
 
+}
 
-let img = obj.originalImage;
+#downloadZip{
 
+    background:#16a34a;
 
+    color:white;
 
-let padding = 80;
+}
 
+#clearAll{
 
+    background:white;
 
-let scale = Math.min(
+    color:#333;
 
-(1200-padding*2)/img.width,
+    border:1px solid #ccc;
 
-(900-padding*2)/img.height
+}
 
-);
+.footer{
 
+    text-align:center;
 
+    margin-top:30px;
 
+    color:#64748b;
 
-let w = img.width * scale;
-
-let h = img.height * scale;
-
-
-
-let x = (1200-w)/2;
-
-let y = (900-h)/2;
-
-
-
-
-
-let brightness =
-brightnessSlider.value;
-
-
-let contrast =
-contrastSlider.value;
-
-
-
-
-
-ctx.filter =
-
-`brightness(${brightness}%) contrast(${contrast}%)`;
-
-
-
-
-
-ctx.drawImage(
-
-img,
-
-x,
-
-y,
-
-w,
-
-h
-
-);
-
-
-
-
-ctx.filter="none";
-
-
-
-
-
-// Border
-
-ctx.strokeStyle="black";
-
-ctx.lineWidth=8;
-
-
-ctx.strokeRect(
-
-4,
-
-4,
-
-1192,
-
-892
-
-);
-
-
-
-
-
-
-// Noise reduction
-
-if(noiseSlider.value > 0){
-
-applyNoiseReduction(
-canvas
-);
+    font-size:15px;
 
 }
 
 
+/* Responsive */
+
+@media(max-width:768px){
+
+.card{
+
+    width:100%;
 
 }
 
+.preview-header{
 
+    flex-direction:column;
 
-
-
-
-
-
-
-// Noise reduction
-
-function applyNoiseReduction(canvas){
-
-
-let ctx =
-canvas.getContext("2d");
-
-
-
-let imgData =
-ctx.getImageData(
-
-0,
-
-0,
-
-canvas.width,
-
-canvas.height
-
-);
-
-
-
-let data =
-imgData.data;
-
-
-
-
-for(let i=0;i<data.length;i+=4){
-
-
-let avg =
-
-(
-
-data[i]+
-
-data[i+1]+
-
-data[i+2]
-
-)/3;
-
-
-
-
-data[i] =
-(data[i]*0.75)+(avg*0.25);
-
-
-
-data[i+1] =
-(data[i+1]*0.75)+(avg*0.25);
-
-
-
-data[i+2] =
-(data[i+2]*0.75)+(avg*0.25);
-
-
+    gap:10px;
 
 }
 
+.enhance-box label{
 
+    flex-direction:column;
 
-ctx.putImageData(
-
-imgData,
-
-0,
-
-0
-
-);
-
-
+    align-items:flex-start;
 
 }
 
+.enhance-box span{
 
-
-
-
-
-
-
-
-// Create preview card
-
-function createCard(obj){
-
-
-let card =
-document.createElement("div");
-
-
-card.className="card";
-
-
-
-card.appendChild(
-obj.canvas
-);
-
-
-
-
-
-let row =
-document.createElement("div");
-
-
-
-row.className="filename";
-
-
-
-
-
-row.innerHTML =
-
-`
-
-<span>${obj.file.name}</span>
-
-<span class="delete">🗑</span>
-
-`;
-
-
-
-
-
-
-row.querySelector(".delete")
-.onclick=function(){
-
-
-images =
-images.filter(
-x=>x!==obj
-);
-
-
-card.remove();
-
-
-updateCount();
-
-
-};
-
-
-
-
-card.appendChild(row);
-
-
-preview.appendChild(card);
-
-
+    width:auto;
 
 }
 
+.bottom-buttons{
 
-
-
-
-
-
-
-
-function updateCount(){
-
-
-count.innerHTML =
-
-images.length +
-
-" image(s) loaded";
-
+    flex-direction:column;
 
 }
 
+button{
 
-
-
-
-
-
-
-
-// LIVE slider update
-
-function updatePreview(){
-
-
-brightnessValue.innerHTML =
-brightnessSlider.value+"%";
-
-
-contrastValue.innerHTML =
-contrastSlider.value+"%";
-
-
-noiseValue.innerHTML =
-noiseSlider.value;
-
-
-
-images.forEach(obj=>{
-
-
-drawProcessedImage(obj);
-
-
-
-});
-
+    width:100%;
 
 }
-
-
-
-
-
-brightnessSlider.addEventListener(
-"input",
-updatePreview
-);
-
-
-contrastSlider.addEventListener(
-"input",
-updatePreview
-);
-
-
-noiseSlider.addEventListener(
-"input",
-updatePreview
-);
-
-
-
-
-
-
-
-
-
-// Download PNG images
-
-downloadAll.onclick=function(){
-
-
-
-images.forEach((obj,i)=>{
-
-
-let a =
-document.createElement("a");
-
-
-
-a.download =
-"PixPro_Image_"+(i+1)+".png";
-
-
-
-a.href =
-obj.canvas.toDataURL(
-"image/png"
-);
-
-
-
-a.click();
-
-
-
-});
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// Download ZIP
-
-downloadZip.onclick = async function(){
-
-
-
-if(images.length===0){
-
-
-alert("No images available");
-
-return;
-
-
-}
-
-
-
-let zip = new JSZip();
-
-
-
-
-for(let i=0;i<images.length;i++){
-
-
-
-let dataURL =
-images[i].canvas.toDataURL(
-"image/png"
-);
-
-
-
-let imageData =
-dataURL.split(",")[1];
-
-
-
-
-
-zip.file(
-
-"PixPro_Image_"+(i+1)+".png",
-
-imageData,
-
-{
-
-base64:true
-
-}
-
-);
-
-
-
-}
-
-
-
-
-zip.generateAsync({
-
-type:"blob"
-
-})
-
-.then(function(content){
-
-
-
-let a =
-document.createElement("a");
-
-
-
-a.href =
-URL.createObjectURL(content);
-
-
-
-a.download =
-"PixPro_Images.zip";
-
-
-
-a.click();
-
-
-
-});
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// Clear all
-
-clearAll.onclick=function(){
-
-
-
-images=[];
-
-
-preview.innerHTML="";
-
-
-updateCount();
-
-
 
 }

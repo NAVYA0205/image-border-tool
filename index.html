@@ -73,7 +73,8 @@ JPG, PNG, GIF, BMP, WebP
 
 
 
-<!-- Image Enhancement Controls -->
+
+<!-- Live Image Enhancement -->
 
 <div class="enhance-box">
 
@@ -88,13 +89,18 @@ Image Enhancement
 
 Brightness
 
-<input type="range" 
+<input type="range"
 id="brightness"
 min="70"
 max="130"
 value="100">
 
+<span id="brightnessValue">
+100%
+</span>
+
 </label>
+
 
 
 
@@ -103,13 +109,18 @@ value="100">
 
 Contrast
 
-<input type="range" 
+<input type="range"
 id="contrast"
 min="70"
 max="130"
 value="100">
 
+<span id="contrastValue">
+100%
+</span>
+
 </label>
+
 
 
 
@@ -123,6 +134,10 @@ id="noise"
 min="0"
 max="3"
 value="0">
+
+<span id="noiseValue">
+0
+</span>
 
 </label>
 
@@ -185,9 +200,10 @@ Preview (4:3 Output)
 
 
 
+
 <p class="footer">
 
-Images are standardized to 4:3 format (1200 × 900 px) with white background, black border, and optional quality enhancement.
+Images are standardized to 4:3 format (1200 × 900 px) with white background, black border, and optional image enhancement.
 
 </p>
 
@@ -200,13 +216,12 @@ Images are standardized to 4:3 format (1200 × 900 px) with white background, bl
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
 <script src="script.js"></script>
 
 
 </body>
-
 
 </html>

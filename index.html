@@ -2,33 +2,42 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WI Image Formatter</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WI Image Formatter</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>WI Image Formatter</h1>
+<h1>WI Image Formatter</h1>
 
-        <input type="file" id="upload" accept="image/*">
 
-        <br><br>
+<div class="controls">
 
-        <canvas id="canvas"></canvas>
+<input type="file" 
+id="upload" 
+accept="image/*"
+multiple>
 
-        <br><br>
 
-        <button id="download">
-            Download Image
-        </button>
+</div>
 
-    </div>
 
-    <script src="script.js"></script>
+<div id="preview"></div>
+
+
+</div>
+
+
+<script src="script.js"></script>
+
 
 </body>
 

@@ -85,3 +85,37 @@ canvas{
     max-width:100%;
 
 }
+#preview{
+
+display:flex;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+gap:30px;
+
+}
+
+
+#preview div{
+
+text-align:center;
+
+}
+
+
+#preview canvas{
+
+width:400px;
+
+height:300px;
+
+}
+
+
+#preview button{
+
+margin-top:10px;
+
+}

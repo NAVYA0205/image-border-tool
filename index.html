@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>WI Image Formatter</title>
 
@@ -14,30 +15,111 @@
 
 <body>
 
+
 <div class="container">
+
 
 <h1>WI Image Formatter</h1>
 
+<p class="subtitle">
+Upload multiple images. Each will be fitted to a 4:3 white canvas with a black border.
+</p>
 
-<div class="controls">
+
+
+<div class="upload-box">
+
+
+<div class="upload-icon">
+⬆
+</div>
+
+
+<h2>Choose Images</h2>
+
+<p>
+Click or drag & drop images here
+</p>
+
+<span>
+You can select multiple files
+</span>
+
+
+<label class="upload-btn">
+
+Select Files
 
 <input type="file" 
-id="upload" 
+id="upload"
 accept="image/*"
-multiple>
+multiple
+hidden>
+
+</label>
+
+
+<small>
+JPG, PNG, GIF, BMP, WebP
+</small>
 
 
 </div>
 
 
-<div id="preview"></div>
+
+<div class="preview-header">
+
+<h3>
+Preview (4:3 Output)
+</h3>
+
+
+<span id="count">
+0 image(s) loaded
+</span>
 
 
 </div>
+
+
+
+<div id="preview" class="preview-area"></div>
+
+
+
+
+<div class="bottom-buttons">
+
+
+<button id="downloadAll">
+⬇ Download All
+</button>
+
+
+<button id="clearAll">
+🗑 Clear All
+</button>
+
+
+</div>
+
+
+
+<p class="footer">
+
+All images are output in 4:3 ratio (1200 x 900 px)
+with white background and black border.
+
+</p>
+
+
+
+</div>
+
 
 
 <script src="script.js"></script>
-
 
 </body>
 

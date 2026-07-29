@@ -123,11 +123,12 @@ function processImage(file){
 
         let obj = {
 
-            file: file,
-            canvas: canvas,
-            originalImage: img
+    file: file,
+    canvas: canvas,
+    originalImage: img,
+    caption: ""
 
-        };
+};
 
         images.push(obj);
 
@@ -283,26 +284,38 @@ function drawProcessedImage(obj){
     // (INSIDE BORDER)
     // ==========================
 
-    let figureNumber =
-        images.indexOf(obj) + 1;
+   let figureNumber =
+images.indexOf(obj) + 1;
 
-    ctx.fillStyle = "black";
 
-    ctx.font = "bold 28px Arial";
+let captionText = obj.caption.trim();
 
-    ctx.textAlign = "center";
 
-    ctx.textBaseline = "middle";
+if(captionText === ""){
 
-    ctx.fillText(
+    captionText = "Figure " + figureNumber;
 
-        "Figure " + figureNumber,
+}
 
-        canvas.width / 2,
 
-        850
+ctx.fillStyle = "black";
 
-    );
+ctx.font = "bold 28px Arial";
+
+ctx.textAlign = "center";
+
+ctx.textBaseline = "middle";
+
+
+ctx.fillText(
+
+    captionText,
+
+    canvas.width / 2,
+
+    850
+
+);
 
 }
 // ==========================
@@ -362,7 +375,28 @@ function createCard(obj) {
     card.className = "card";
 
     card.appendChild(obj.canvas);
+let captionBox = document.createElement("input");
 
+captionBox.type = "text";
+
+captionBox.placeholder = "Enter caption (optional)";
+
+captionBox.className = "caption-input";
+
+
+captionBox.value = obj.caption;
+
+
+captionBox.oninput = function(){
+
+    obj.caption = this.value;
+
+    drawProcessedImage(obj);
+
+};
+
+
+card.appendChild(captionBox);
 
 
     let row = document.createElement("div");

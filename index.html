@@ -8,24 +8,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<div class="container">
 
     <h1>Image Border Tool</h1>
 
-    <input type="file" id="upload" accept="image/*">
+    <div class="controls">
 
-    <br><br>
+        <label>White Margin (px)</label>
+        <input type="number" id="margin" value="40">
+
+        <label>Border Width (px)</label>
+        <input type="number" id="borderWidth" value="1">
+
+        <br><br>
+
+        <input type="file" id="upload" accept="image/*">
+
+        <button id="download">
+            Download Image
+        </button>
+
+    </div>
 
     <canvas id="canvas"></canvas>
 
-    <br><br>
+</div>
 
-    <button id="download">
-        Download Image
-    </button>
-
-    <script src="script.js"></script>
-
-</body>
+<script src="script.js"></script>
 
 </html>

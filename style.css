@@ -2,40 +2,58 @@
     box-sizing:border-box;
 }
 
+
 body{
+
     margin:0;
-    font-family:Arial,Helvetica,sans-serif;
+
+    font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
     background:#f4f6f9;
+
 }
+
+
 
 .container{
 
     width:90%;
+
     max-width:1300px;
 
     margin:30px auto;
 
-    background:#fff;
+    background:white;
 
-    padding:30px;
+    padding:35px;
 
-    border-radius:15px;
+    border-radius:18px;
 
-    box-shadow:0 5px 25px rgba(0,0,0,.12);
+    box-shadow:
+    0 8px 30px rgba(0,0,0,.12);
 
 }
+
+
+
+/* HEADER */
 
 h1{
 
     text-align:center;
 
-    font-size:42px;
+    font-size:44px;
 
-    margin-bottom:5px;
+    margin:0;
 
     color:#111827;
 
 }
+
+
 
 .subtitle{
 
@@ -45,21 +63,34 @@ h1{
 
     font-size:18px;
 
-    margin-bottom:30px;
+    margin:8px 0 35px;
 
 }
 
-/* Upload */
+
+
+
+
+/* =========================
+UPLOAD SECTION
+========================= */
+
 
 .upload-box{
 
-    height:230px;
+    height:290px;
 
     border:2px dashed #2563eb;
 
-    border-radius:12px;
+    border-radius:20px;
 
-    background:#f8fbff;
+    background:
+    linear-gradient(
+    135deg,
+    #f8fbff,
+    #edf5ff
+    );
+
 
     display:flex;
 
@@ -69,74 +100,192 @@ h1{
 
     align-items:center;
 
-}
-
-.upload-icon{
-
-    font-size:55px;
-
-    color:#2563eb;
+    transition:.3s;
 
 }
+
+
+
+.upload-box:hover{
+
+    transform:translateY(-4px);
+
+    border-color:#1d4ed8;
+
+    box-shadow:
+    0 12px 30px rgba(37,99,235,.18);
+
+}
+
+
+
+
+.icon-circle{
+
+    width:80px;
+
+    height:80px;
+
+    border-radius:50%;
+
+    background:
+    linear-gradient(
+    135deg,
+    #2563eb,
+    #1e40af
+    );
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:40px;
+
+    box-shadow:
+    0 10px 25px rgba(37,99,235,.35);
+
+}
+
+
 
 .upload-box h2{
 
-    margin:10px;
+    margin:12px 0 5px;
+
+    font-size:25px;
+
+    color:#111827;
 
 }
+
+
 
 .upload-box p{
 
+    text-align:center;
+
+    color:#475569;
+
     margin:5px;
 
-    font-size:18px;
+    line-height:1.5;
 
 }
 
-.upload-box span{
+
+
+.upload-box p span{
+
+    font-size:15px;
 
     color:#64748b;
 
 }
 
+
+
+/* BUTTON */
+
+
 .upload-btn{
 
-    margin-top:18px;
+    margin-top:15px;
 
-    background:#2563eb;
+    padding:13px 35px;
+
+    border-radius:10px;
 
     color:white;
 
-    padding:12px 28px;
-
-    border-radius:6px;
+    font-weight:600;
 
     cursor:pointer;
+
+    background:
+    linear-gradient(
+    135deg,
+    #2563eb,
+    #1d4ed8
+    );
+
+
+    box-shadow:
+    0 8px 20px rgba(37,99,235,.3);
 
     transition:.3s;
 
 }
 
+
+
 .upload-btn:hover{
 
-    background:#1d4ed8;
+    transform:scale(1.05);
 
 }
 
-.upload-box small{
 
-    margin-top:12px;
+
+/* FORMAT TAGS */
+
+
+.format-tags{
+
+    display:flex;
+
+    gap:8px;
+
+    margin-top:15px;
+
+}
+
+
+
+.format-tags span{
+
+    padding:5px 12px;
+
+    background:white;
+
+    border-radius:20px;
+
+    border:1px solid #dbeafe;
+
+    color:#2563eb;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+
+
+.upload-info{
+
+    margin-top:15px;
+
+    font-size:13px;
 
     color:#64748b;
 
 }
 
 
-/* Enhancement */
+
+
+
+/* =========================
+ENHANCEMENT PANEL
+========================= */
+
 
 .enhance-box{
 
-    margin:25px auto;
+    margin:30px auto;
 
     width:420px;
 
@@ -144,58 +293,75 @@ h1{
 
     border:1px solid #e5e7eb;
 
-    border-radius:8px;
+    border-radius:12px;
 
-    padding:16px 20px;
+    padding:20px;
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,.05);
 
 }
+
+
 
 .enhance-box h3{
 
     margin-top:0;
 
-    margin-bottom:20px;
+    text-align:center;
+
+    color:#111827;
 
 }
+
+
 
 .enhance-box label{
 
     display:flex;
 
-    align-items:center;
-
     justify-content:space-between;
 
-    margin:12px 0;
+    align-items:center;
+
+    margin:15px 0;
 
     font-size:14px;
 
-    font-weight:500;
+    font-weight:600;
 
 }
 
+
+
 .enhance-box input[type=range]{
 
-    width:180px;
+    width:160px;
 
     cursor:pointer;
 
 }
 
+
+
 .enhance-box span{
 
-    width:42px;
+    width:45px;
 
     text-align:right;
 
-    color:#6b7280;
-
-    font-size:13px;
+    color:#64748b;
 
 }
 
 
-/* Preview */
+
+
+
+/* =========================
+PREVIEW
+========================= */
+
 
 .preview-header{
 
@@ -209,6 +375,8 @@ h1{
 
 }
 
+
+
 .preview-area{
 
     display:flex;
@@ -217,31 +385,40 @@ h1{
 
     gap:20px;
 
-    margin-top:15px;
+    margin-top:20px;
 
 }
+
+
 
 .card{
 
     width:390px;
 
-    border:1px solid #ddd;
-
-    border-radius:10px;
-
     background:white;
 
-    padding:10px;
+    border:1px solid #ddd;
 
-    transition:.25s;
+    border-radius:12px;
+
+    padding:12px;
+
+    transition:.3s;
 
 }
+
+
 
 .card:hover{
 
-    box-shadow:0 5px 18px rgba(0,0,0,.12);
+    transform:translateY(-4px);
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,.12);
 
 }
+
+
 
 .card canvas{
 
@@ -249,11 +426,13 @@ h1{
 
     display:block;
 
-    border-radius:5px;
+    border-radius:8px;
 
     border:1px solid #333;
 
 }
+
+
 
 .filename{
 
@@ -267,22 +446,64 @@ h1{
 
     font-size:14px;
 
-    word-break:break-all;
-
 }
+
+
 
 .delete{
 
-    cursor:pointer;
-
     color:red;
+
+    cursor:pointer;
 
     font-size:22px;
 
 }
 
 
-/* Buttons */
+
+
+
+/* CAPTION */
+
+
+.caption-input{
+
+    width:100%;
+
+    margin-top:10px;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    border:1px solid #d1d5db;
+
+    font-size:14px;
+
+    outline:none;
+
+}
+
+
+
+.caption-input:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:
+    0 0 5px rgba(37,99,235,.25);
+
+}
+
+
+
+
+
+/* =========================
+DOWNLOAD BUTTONS
+========================= */
+
 
 .bottom-buttons{
 
@@ -298,27 +519,33 @@ h1{
 
 }
 
+
+
 button{
+
+    padding:14px 32px;
 
     border:none;
 
-    border-radius:8px;
-
-    padding:14px 30px;
+    border-radius:10px;
 
     font-size:16px;
 
     cursor:pointer;
 
-    transition:.25s;
+    transition:.3s;
 
 }
+
+
 
 button:hover{
 
-    transform:translateY(-2px);
+    transform:translateY(-3px);
 
 }
+
+
 
 #downloadAll{
 
@@ -328,6 +555,8 @@ button:hover{
 
 }
 
+
+
 #downloadZip{
 
     background:#16a34a;
@@ -336,15 +565,19 @@ button:hover{
 
 }
 
+
+
 #clearAll{
 
     background:white;
 
-    color:#333;
-
     border:1px solid #ccc;
 
 }
+
+
+
+
 
 .footer{
 
@@ -359,15 +592,37 @@ button:hover{
 }
 
 
-/* Responsive */
+
+
+
+/* MOBILE */
+
 
 @media(max-width:768px){
+
+
+.container{
+
+    width:95%;
+
+    padding:20px;
+
+}
+
 
 .card{
 
     width:100%;
 
 }
+
+
+.enhance-box{
+
+    width:100%;
+
+}
+
 
 .preview-header{
 
@@ -377,19 +632,6 @@ button:hover{
 
 }
 
-.enhance-box label{
-
-    flex-direction:column;
-
-    align-items:flex-start;
-
-}
-
-.enhance-box span{
-
-    width:auto;
-
-}
 
 .bottom-buttons{
 
@@ -397,34 +639,12 @@ button:hover{
 
 }
 
+
 button{
 
     width:100%;
 
 }
 
-}
-.caption-input{
-
-    width:100%;
-
-    margin-top:10px;
-
-    padding:8px 10px;
-
-    border:1px solid #ddd;
-
-    border-radius:6px;
-
-    font-size:14px;
-
-    outline:none;
-
-}
-
-
-.caption-input:focus{
-
-    border-color:#2563eb;
 
 }

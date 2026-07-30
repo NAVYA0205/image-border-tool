@@ -18,54 +18,133 @@ const brightnessValue = document.getElementById("brightnessValue");
 const contrastValue = document.getElementById("contrastValue");
 const noiseValue = document.getElementById("noiseValue");
 
-
-// ==========================
-// IMAGE ARRAY
-// ==========================
-
 let images = [];
 
+brightnessValue.textContent = brightnessSlider.value + "%";
+contrastValue.textContent = contrastSlider.value + "%";
+noiseValue.textContent = noiseSlider.value;
+
 
 // ==========================
-// SLIDER VALUE DISPLAY
+// FILENAME SORTER
 // ==========================
 
-brightnessValue.innerHTML = brightnessSlider.value + "%";
-contrastValue.innerHTML = contrastSlider.value + "%";
-noiseValue.innerHTML = noiseSlider.value;
+function parseFileName(name){
+
+    name = name.replace(/\.[^/.]+$/, "");
+
+    const parts = name.split("-");
+
+    return{
+
+        prefix : parts[0] || "",
+
+        middle : parts[1] || "",
+
+        main : parseInt(parts[2]) || 0,
+
+        sub : parts.length > 3 ? parseInt(parts[3]) : 0
+
+    };
+
+}
+
+function sortImages(){
+
+    images.sort((a,b)=>{
+
+        const A = parseFileName(a.file.name);
+
+        const B = parseFileName(b.file.name);
+
+        if(A.prefix !== B.prefix)
+            return A.prefix.localeCompare(B.prefix);
+
+        if(A.middle !== B.middle)
+            return A.middle.localeCompare(B.middle);
+
+        if(A.main !== B.main)
+            return A.main - B.main;
+
+        return A.sub - B.sub;
+
+    });
+
+}
+
 
 // ==========================
-// UPLOAD IMAGES
+// IMAGE LOADER
 // ==========================
 
-upload.addEventListener("change", async function (e) {
+function processImage(file){
 
-    const files = Array.from(e.target.files);
+    return new Promise(resolve=>{
 
-    if (files.length === 0) return;
+        const img = new Image();
 
-    const loadedImages = await Promise.all(
-        files.map(file => processImage(file))
+        img.onload=function(){
+
+            const canvas=document.createElement("canvas");
+
+            canvas.width=1200;
+            canvas.height=900;
+
+            resolve({
+
+                file:file,
+
+                canvas:canvas,
+
+                originalImage:img,
+
+                caption:""
+
+            });
+
+        };
+
+        img.src=URL.createObjectURL(file);
+
+    });
+
+}
+
+
+// ==========================
+// UPLOAD
+// ==========================
+
+upload.addEventListener("change",async function(e){
+
+    const files=[...e.target.files];
+
+    if(files.length===0) return;
+
+    const loaded=await Promise.all(
+
+        files.map(processImage)
+
     );
 
-    images.push(...loadedImages);
+    images.push(...loaded);
 
-    // Sort by filename
-    images.sort((a, b) =>
-        a.file.name.localeCompare(
-            b.file.name,
-            undefined,
-            {
-                numeric: true,
-                sensitivity: "base"
-            }
-        )
-    );
+    sortImages();
 
-    // Rebuild preview
-    preview.innerHTML = "";
+    rebuildPreview();
 
-    images.forEach(obj => {
+    upload.value="";
+
+});
+// ==========================
+// REBUILD PREVIEW
+// ==========================
+
+function rebuildPreview(){
+
+    preview.innerHTML="";
+
+    images.forEach(obj=>{
 
         drawProcessedImage(obj);
 
@@ -75,43 +154,7 @@ upload.addEventListener("change", async function (e) {
 
     updateCount();
 
-    // Allow selecting the same files again
-    upload.value = "";
-
-});
-
-
-
-
-
-// ==========================
-// LIVE PREVIEW
-// ==========================
-
-brightnessSlider.addEventListener("input", updatePreview);
-contrastSlider.addEventListener("input", updatePreview);
-noiseSlider.addEventListener("input", updatePreview);
-
-
-function updatePreview(){
-
-    brightnessValue.innerHTML =
-    brightnessSlider.value + "%";
-
-    contrastValue.innerHTML =
-    contrastSlider.value + "%";
-
-    noiseValue.innerHTML =
-    noiseSlider.value;
-
-    images.forEach(function(obj){
-
-        drawProcessedImage(obj);
-
-    });
-
 }
-
 
 
 // ==========================
@@ -120,58 +163,33 @@ function updatePreview(){
 
 function updateCount(){
 
-    count.innerHTML =
-    images.length + " image(s) loaded";
+    count.textContent = images.length + " image(s) loaded";
 
 }
 
 
-
 // ==========================
-// RENUMBER FIGURES
+// LIVE SLIDERS
 // ==========================
 
-function refreshFigureNumbers(){
+brightnessSlider.addEventListener("input",updatePreview);
+contrastSlider.addEventListener("input",updatePreview);
+noiseSlider.addEventListener("input",updatePreview);
 
-    images.forEach(function(obj){
+function updatePreview(){
 
-        drawProcessedImage(obj);
+    brightnessValue.textContent =
+    brightnessSlider.value + "%";
 
-    });
+    contrastValue.textContent =
+    contrastSlider.value + "%";
+
+    noiseValue.textContent =
+    noiseSlider.value;
+
+    images.forEach(drawProcessedImage);
 
 }
-// ==========================
-// PROCESS IMAGE
-// ==========================
-
-function processImage(file) {
-
-    return new Promise((resolve) => {
-
-        const img = new Image();
-
-        img.onload = function () {
-
-            const canvas = document.createElement("canvas");
-
-            canvas.width = 1200;
-            canvas.height = 900;
-
-            resolve({
-                file: file,
-                canvas: canvas,
-                originalImage: img,
-                caption: ""
-            });
-
-        };
-
-        img.src = URL.createObjectURL(file);
-
-    });
-
-}
-
 
 
 // ==========================
@@ -180,124 +198,48 @@ function processImage(file) {
 
 function drawProcessedImage(obj){
 
-    let canvas = obj.canvas;
+    const canvas=obj.canvas;
 
-    let ctx = canvas.getContext("2d");
+    const ctx=canvas.getContext("2d");
 
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
+    ctx.clearRect(0,0,1200,900);
+
+    ctx.fillStyle="white";
+    ctx.fillRect(0,0,1200,900);
+
+    const img=obj.originalImage;
+
+    const left=80;
+    const top=80;
+    const bottom=140;
+
+    const availWidth=1200-left*2;
+    const availHeight=900-top-bottom;
+
+    const scale=Math.min(
+        availWidth/img.width,
+        availHeight/img.height
     );
 
+    const w=img.width*scale;
+    const h=img.height*scale;
 
+    const x=(1200-w)/2;
+    const y=top+(availHeight-h)/2;
 
-    // White Background
-
-    ctx.fillStyle = "white";
-
-    ctx.fillRect(
-        0,
-        0,
-        1200,
-        900
-    );
-
-
-
-    let img = obj.originalImage;
-
-
-
-    // Leave bottom space for caption
-
-    const leftRightPadding = 80;
-
-    const topPadding = 80;
-
-    const bottomPadding = 140;
-
-
-
-    let availableWidth =
-    1200 - (leftRightPadding * 2);
-
-    let availableHeight =
-    900 - topPadding - bottomPadding;
-
-
-
-    let scale = Math.min(
-
-        availableWidth / img.width,
-
-        availableHeight / img.height
-
-    );
-
-
-
-    let w = img.width * scale;
-
-    let h = img.height * scale;
-
-
-
-    let x =
-    (1200 - w) / 2;
-
-    let y =
-    topPadding + (availableHeight - h) / 2;
-
-
-
-    // Brightness & Contrast
-
-    ctx.filter =
-
+    ctx.filter=
     `brightness(${brightnessSlider.value}%)
      contrast(${contrastSlider.value}%)`;
 
+    ctx.drawImage(img,x,y,w,h);
 
+    ctx.filter="none";
 
-    ctx.drawImage(
+    ctx.strokeStyle="black";
+    ctx.lineWidth=8;
+    ctx.strokeRect(4,4,1192,892);
 
-        img,
-
-        x,
-
-        y,
-
-        w,
-
-        h
-
-    );
-
-
-
-    ctx.filter = "none";
-        // ==========================
-    // BLACK BORDER
-    // ==========================
-
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 8;
-
-    ctx.strokeRect(
-        4,
-        4,
-        1192,
-        892
-    );
-
-
-    // ==========================
-    // NOISE REDUCTION (OPTIONAL)
-    // ==========================
-
-    if (Number(noiseSlider.value) > 0) {
+    if(Number(noiseSlider.value)>0){
 
         applyNoiseReduction(
             canvas,
@@ -306,159 +248,124 @@ function drawProcessedImage(obj){
 
     }
 
+    // Figure Number
+    const figureNumber = images.indexOf(obj)+1;
 
-    // ==========================
-    // FIGURE CAPTION
-    // (INSIDE BORDER)
-    // ==========================
+    const caption =
+        obj.caption.trim() || `Figure ${figureNumber}`;
 
-  let figureNumber = images.indexOf(obj) + 1;
+    ctx.fillStyle="black";
+    ctx.font="bold 28px Arial";
+    ctx.textAlign="center";
+    ctx.textBaseline="middle";
 
-
-let captionText = obj.caption.trim();
-
-
-if(captionText === ""){
-
-    captionText = "Figure " + figureNumber;
-
-}
-
-
-ctx.fillStyle = "black";
-
-ctx.font = "bold 28px Arial";
-
-ctx.textAlign = "center";
-
-ctx.textBaseline = "middle";
-
-
-ctx.fillText(
-
-    captionText,
-
-    canvas.width / 2,
-
-    850
-
-);
+    ctx.fillText(
+        caption,
+        600,
+        850
+    );
 
 }
 // ==========================
 // NOISE REDUCTION
 // ==========================
 
-function applyNoiseReduction(canvas, strength) {
+function applyNoiseReduction(canvas, strength){
 
-    let ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d");
 
-    let imageData = ctx.getImageData(
+    const imageData = ctx.getImageData(
         0,
         0,
         canvas.width,
         canvas.height
     );
 
-    let data = imageData.data;
+    const data = imageData.data;
 
-    // Apply multiple passes based on slider value
-    for (let pass = 0; pass < strength; pass++) {
+    for(let pass=0; pass<strength; pass++){
 
-        for (let i = 0; i < data.length; i += 4) {
+        for(let i=0;i<data.length;i+=4){
 
-            let avg = (
+            const avg = (
                 data[i] +
-                data[i + 1] +
-                data[i + 2]
+                data[i+1] +
+                data[i+2]
             ) / 3;
 
-            data[i]     = data[i] * 0.75 + avg * 0.25;
-            data[i + 1] = data[i + 1] * 0.75 + avg * 0.25;
-            data[i + 2] = data[i + 2] * 0.75 + avg * 0.25;
+            data[i]   = data[i]*0.75 + avg*0.25;
+            data[i+1] = data[i+1]*0.75 + avg*0.25;
+            data[i+2] = data[i+2]*0.75 + avg*0.25;
 
         }
 
     }
 
-    ctx.putImageData(
-        imageData,
-        0,
-        0
-    );
+    ctx.putImageData(imageData,0,0);
 
 }
-
 
 
 // ==========================
 // CREATE PREVIEW CARD
 // ==========================
 
-function createCard(obj) {
+function createCard(obj){
 
-    let card = document.createElement("div");
+    const card = document.createElement("div");
 
     card.className = "card";
 
     card.appendChild(obj.canvas);
-let captionBox = document.createElement("input");
-
-captionBox.type = "text";
-
-captionBox.placeholder = "Enter caption (optional)";
-
-captionBox.className = "caption-input";
 
 
-captionBox.value = obj.caption;
+    // Caption box
+
+    const captionBox = document.createElement("input");
+
+    captionBox.type = "text";
+
+    captionBox.placeholder = "Enter caption (optional)";
+
+    captionBox.className = "caption-input";
+
+    captionBox.value = obj.caption;
+
+    captionBox.oninput = function(){
+
+        obj.caption = this.value;
+
+        drawProcessedImage(obj);
+
+    };
+
+    card.appendChild(captionBox);
 
 
-captionBox.oninput = function(){
+    // Filename row
 
-    obj.caption = this.value;
-
-    drawProcessedImage(obj);
-
-};
-
-
-card.appendChild(captionBox);
-
-
-    let row = document.createElement("div");
+    const row = document.createElement("div");
 
     row.className = "filename";
 
-
-
     row.innerHTML = `
-
         <span>${obj.file.name}</span>
-
         <span class="delete">🗑</span>
-
     `;
-row.querySelector(".delete").onclick = function () {
-
-    images = images.filter(image => image !== obj);
-
-    preview.innerHTML = "";
-
-    images.forEach(image => {
-
-        drawProcessedImage(image);
-
-        createCard(image);
-
-    });
-
-    updateCount();
-
-};
 
 
-    
+    // Delete
+
+    row.querySelector(".delete").onclick = function(){
+
+        images = images.filter(image => image !== obj);
+
+        sortImages();
+
+        rebuildPreview();
+
+    };
+
 
     card.appendChild(row);
 
@@ -471,7 +378,7 @@ row.querySelector(".delete").onclick = function () {
 
 downloadAll.onclick = function () {
 
-    if (images.length === 0) {
+    if(images.length === 0){
 
         alert("No images available.");
 
@@ -479,13 +386,13 @@ downloadAll.onclick = function () {
 
     }
 
-    images.forEach(function (obj, index) {
+    images.forEach((obj,index)=>{
 
-        let a = document.createElement("a");
+        const a = document.createElement("a");
 
         a.href = obj.canvas.toDataURL("image/png");
 
-        a.download = "Figure_" + (index + 1) + ".png";
+        a.download = `Figure_${index+1}.png`;
 
         a.click();
 
@@ -494,14 +401,13 @@ downloadAll.onclick = function () {
 };
 
 
-
 // ==========================
 // DOWNLOAD ZIP
 // ==========================
 
-downloadZip.onclick = async function () {
+downloadZip.onclick = async function(){
 
-    if (images.length === 0) {
+    if(images.length===0){
 
         alert("No images available.");
 
@@ -509,29 +415,37 @@ downloadZip.onclick = async function () {
 
     }
 
-    let zip = new JSZip();
+    const zip = new JSZip();
 
-    images.forEach(function (obj, index) {
+    images.forEach((obj,index)=>{
 
-        let dataURL = obj.canvas.toDataURL("image/png");
+        const dataURL = obj.canvas.toDataURL("image/png");
 
-        let imageData = dataURL.split(",")[1];
+        const base64 = dataURL.split(",")[1];
 
         zip.file(
-            "Figure_" + (index + 1) + ".png",
-            imageData,
+
+            `Figure_${index+1}.png`,
+
+            base64,
+
             {
-                base64: true
+
+                base64:true
+
             }
+
         );
 
     });
 
-    let content = await zip.generateAsync({
-        type: "blob"
+    const content = await zip.generateAsync({
+
+        type:"blob"
+
     });
 
-    let a = document.createElement("a");
+    const a = document.createElement("a");
 
     a.href = URL.createObjectURL(content);
 
@@ -542,27 +456,25 @@ downloadZip.onclick = async function () {
 };
 
 
-
 // ==========================
 // CLEAR ALL
 // ==========================
 
-clearAll.onclick = function () {
+clearAll.onclick = function(){
 
-    images = [];
+    images=[];
 
-    preview.innerHTML = "";
+    preview.innerHTML="";
 
-    upload.value = "";
+    upload.value="";
 
     updateCount();
 
 };
 
 
-
 // ==========================
-// INITIAL COUNT
+// INITIALIZE
 // ==========================
 
 updateCount();

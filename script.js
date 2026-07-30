@@ -284,8 +284,16 @@ function drawProcessedImage(obj){
     // (INSIDE BORDER)
     // ==========================
 
-   let figureNumber =
-images.indexOf(obj) + 1;
+  // Create a naturally sorted copy of the images array based on filename
+const sortedImages = [...images].sort((a, b) =>
+    a.file.name.localeCompare(b.file.name, undefined, {
+        numeric: true,
+        sensitivity: "base"
+    })
+);
+
+// Get this image's position in the sorted list
+let figureNumber = sortedImages.indexOf(obj) + 1;
 
 
 let captionText = obj.caption.trim();

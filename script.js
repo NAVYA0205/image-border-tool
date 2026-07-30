@@ -129,15 +129,25 @@ function processImage(file){
     caption: ""
 
 };
+images.push(obj);
 
-        images.push(obj);
+// Sort images by filename
+images.sort((a, b) =>
+    a.file.name.localeCompare(b.file.name, undefined, {
+        numeric: true,
+        sensitivity: "base"
+    })
+);
 
-        drawProcessedImage(obj);
+// Rebuild the preview
+preview.innerHTML = "";
 
-        createCard(obj);
+images.forEach(image => {
+    drawProcessedImage(image);
+    createCard(image);
+});
 
-        updateCount();
-
+updateCount();
     };
 
     img.src = URL.createObjectURL(file);
@@ -284,16 +294,7 @@ function drawProcessedImage(obj){
     // (INSIDE BORDER)
     // ==========================
 
-  // Create a naturally sorted copy of the images array based on filename
-const sortedImages = [...images].sort((a, b) =>
-    a.file.name.localeCompare(b.file.name, undefined, {
-        numeric: true,
-        sensitivity: "base"
-    })
-);
-
-// Get this image's position in the sorted list
-let figureNumber = sortedImages.indexOf(obj) + 1;
+  let figureNumber = images.indexOf(obj) + 1;
 
 
 let captionText = obj.caption.trim();
@@ -420,24 +421,26 @@ card.appendChild(captionBox);
         <span class="delete">🗑</span>
 
     `;
+row.querySelector(".delete").onclick = function () {
+
+    images = images.filter(image => image !== obj);
+
+    preview.innerHTML = "";
+
+    images.forEach(image => {
+
+        drawProcessedImage(image);
+
+        createCard(image);
+
+    });
+
+    updateCount();
+
+};
 
 
-
-    row.querySelector(".delete").onclick = function () {
-
-        images = images.filter(
-            image => image !== obj
-        );
-
-        card.remove();
-
-        updateCount();
-
-        refreshFigureNumbers();
-
-    };
-
-
+    
 
     card.appendChild(row);
 

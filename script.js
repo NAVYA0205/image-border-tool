@@ -34,20 +34,54 @@ brightnessValue.innerHTML = brightnessSlider.value + "%";
 contrastValue.innerHTML = contrastSlider.value + "%";
 noiseValue.innerHTML = noiseSlider.value;
 
-
 // ==========================
 // UPLOAD IMAGES
 // ==========================
 
-upload.addEventListener("change", function(e){
+upload.addEventListener("change", async function (e) {
 
-    for(const file of e.target.files){
+    const files = Array.from(e.target.files);
 
-        processImage(file);
+    if (files.length === 0) return;
 
-    }
+    const loadedImages = await Promise.all(
+        files.map(file => processImage(file))
+    );
+
+    images.push(...loadedImages);
+
+    // Sort by filename
+    images.sort((a, b) =>
+        a.file.name.localeCompare(
+            b.file.name,
+            undefined,
+            {
+                numeric: true,
+                sensitivity: "base"
+            }
+        )
+    );
+
+    // Rebuild preview
+    preview.innerHTML = "";
+
+    images.forEach(obj => {
+
+        drawProcessedImage(obj);
+
+        createCard(obj);
+
+    });
+
+    updateCount();
+
+    // Allow selecting the same files again
+    upload.value = "";
 
 });
+
+
+
 
 
 // ==========================
@@ -110,47 +144,31 @@ function refreshFigureNumbers(){
 // PROCESS IMAGE
 // ==========================
 
-function processImage(file){
+function processImage(file) {
 
-    let img = new Image();
+    return new Promise((resolve) => {
 
-    img.onload = function(){
+        const img = new Image();
 
-        let canvas = document.createElement("canvas");
+        img.onload = function () {
 
-        canvas.width = 1200;
-        canvas.height = 900;
+            const canvas = document.createElement("canvas");
 
-        let obj = {
+            canvas.width = 1200;
+            canvas.height = 900;
 
-    file: file,
-    canvas: canvas,
-    originalImage: img,
-    caption: ""
+            resolve({
+                file: file,
+                canvas: canvas,
+                originalImage: img,
+                caption: ""
+            });
 
-};
-images.push(obj);
+        };
 
-// Sort images by filename
-images.sort((a, b) =>
-    a.file.name.localeCompare(b.file.name, undefined, {
-        numeric: true,
-        sensitivity: "base"
-    })
-);
+        img.src = URL.createObjectURL(file);
 
-// Rebuild the preview
-preview.innerHTML = "";
-
-images.forEach(image => {
-    drawProcessedImage(image);
-    createCard(image);
-});
-
-updateCount();
-    };
-
-    img.src = URL.createObjectURL(file);
+    });
 
 }
 

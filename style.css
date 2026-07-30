@@ -2,58 +2,40 @@
     box-sizing:border-box;
 }
 
-
 body{
-
     margin:0;
-
-    font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+    font-family:Arial,Helvetica,sans-serif;
     background:#f4f6f9;
-
 }
-
-
 
 .container{
 
     width:90%;
-
     max-width:1300px;
 
     margin:30px auto;
 
-    background:white;
+    background:#fff;
 
-    padding:35px;
+    padding:30px;
 
-    border-radius:18px;
+    border-radius:15px;
 
-    box-shadow:
-    0 8px 30px rgba(0,0,0,.12);
+    box-shadow:0 5px 25px rgba(0,0,0,.12);
 
 }
-
-
-
-/* HEADER */
 
 h1{
 
     text-align:center;
 
-    font-size:44px;
+    font-size:42px;
 
-    margin:0;
+    margin-bottom:5px;
 
     color:#111827;
 
 }
-
-
 
 .subtitle{
 
@@ -63,34 +45,21 @@ h1{
 
     font-size:18px;
 
-    margin:8px 0 35px;
+    margin-bottom:30px;
 
 }
 
-
-
-
-
-/* =========================
-UPLOAD SECTION
-========================= */
-
+/* Upload */
 
 .upload-box{
 
-    height:290px;
+    height:230px;
 
     border:2px dashed #2563eb;
 
-    border-radius:20px;
+    border-radius:12px;
 
-    background:
-    linear-gradient(
-    135deg,
-    #f8fbff,
-    #edf5ff
-    );
-
+    background:#f8fbff;
 
     display:flex;
 
@@ -100,294 +69,74 @@ UPLOAD SECTION
 
     align-items:center;
 
-    transition:.3s;
-
 }
 
+.upload-icon{
 
+    font-size:55px;
 
-.upload-box:hover{
-
-    transform:translateY(-4px);
-
-    border-color:#1d4ed8;
-
-    box-shadow:
-    0 12px 30px rgba(37,99,235,.18);
+    color:#2563eb;
 
 }
-
-
-
-
-.icon-circle{
-
-    width:80px;
-
-    height:80px;
-
-    border-radius:50%;
-
-    background:
-    linear-gradient(
-    135deg,
-    #2563eb,
-    #1e40af
-    );
-
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:40px;
-
-    box-shadow:
-    0 10px 25px rgba(37,99,235,.35);
-
-}
-
-
 
 .upload-box h2{
 
-    margin:12px 0 5px;
-
-    font-size:25px;
-
-    color:#111827;
+    margin:10px;
 
 }
-
-
 
 .upload-box p{
 
-    text-align:center;
-
-    color:#475569;
-
     margin:5px;
 
-    line-height:1.5;
+    font-size:18px;
 
 }
 
-
-
-.upload-box p span{
-
-    font-size:15px;
+.upload-box span{
 
     color:#64748b;
 
 }
 
-
-
-/* BUTTON */
-
-
 .upload-btn{
 
-    margin-top:15px;
-
-    padding:13px 35px;
-
-    border-radius:10px;
-
-    color:white;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    background:
-    linear-gradient(
-    135deg,
-    #2563eb,
-    #1d4ed8
-    );
-
-
-    box-shadow:
-    0 8px 20px rgba(37,99,235,.3);
-
-    transition:.3s;
-
-}
-
-
-
-.upload-btn:hover{
-
-    transform:scale(1.05);
-
-}
-
-
-.upload-box{
-
-    width:600px;
-    margin:20px auto;
-
-    background:#ffffff;
-
-    padding:25px;
-
-    border-radius:18px;
-
-    text-align:center;
-
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-
-}
-
-.upload-box h2{
-
-    margin:12px 0 5px;
-
-    font-size:24px;
-
-}
-
-
-.upload-box p{
-
-    margin:0 0 18px;
-
-    color:#555;
-
-}
-
-
-.upload-buttons{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:12px;
-
-}
-
-
-.upload-btn{
+    margin-top:18px;
 
     background:#2563eb;
 
     color:white;
 
-    padding:12px 25px;
+    padding:12px 28px;
 
-    border-radius:10px;
+    border-radius:6px;
 
     cursor:pointer;
-
-    font-weight:600;
 
     transition:.3s;
 
 }
 
-
 .upload-btn:hover{
 
-    background:#1749c6;
+    background:#1d4ed8;
 
 }
 
+.upload-box small{
 
-.upload-btn input{
-
-    display:none;
-
-}
-
-
-.formats{
-
-    margin-top:15px;
-
-}
-
-
-.formats span{
-
-    display:inline-block;
-
-    padding:5px 14px;
-
-    margin:3px;
-
-    border-radius:20px;
-
-    border:1px solid #dbe4ff;
-
-    color:#2563eb;
-
-    font-size:13px;
-
-}
-/* FORMAT TAGS */
-
-
-.format-tags{
-
-    display:flex;
-
-    gap:8px;
-
-    margin-top:15px;
-
-}
-
-
-
-.format-tags span{
-
-    padding:5px 12px;
-
-    background:white;
-
-    border-radius:20px;
-
-    border:1px solid #dbeafe;
-
-    color:#2563eb;
-
-    font-size:12px;
-
-    font-weight:bold;
-
-}
-
-
-
-.upload-info{
-
-    margin-top:15px;
-
-    font-size:13px;
+    margin-top:12px;
 
     color:#64748b;
 
 }
 
 
-
-
-
-/* =========================
-ENHANCEMENT PANEL
-========================= */
-
+/* Enhancement */
 
 .enhance-box{
 
-    margin:30px auto;
+    margin:25px auto;
 
     width:420px;
 
@@ -395,75 +144,58 @@ ENHANCEMENT PANEL
 
     border:1px solid #e5e7eb;
 
-    border-radius:12px;
+    border-radius:8px;
 
-    padding:20px;
-
-    box-shadow:
-    0 4px 15px rgba(0,0,0,.05);
+    padding:16px 20px;
 
 }
-
-
 
 .enhance-box h3{
 
     margin-top:0;
 
-    text-align:center;
-
-    color:#111827;
+    margin-bottom:20px;
 
 }
-
-
 
 .enhance-box label{
 
     display:flex;
 
-    justify-content:space-between;
-
     align-items:center;
 
-    margin:15px 0;
+    justify-content:space-between;
+
+    margin:12px 0;
 
     font-size:14px;
 
-    font-weight:600;
+    font-weight:500;
 
 }
 
-
-
 .enhance-box input[type=range]{
 
-    width:160px;
+    width:180px;
 
     cursor:pointer;
 
 }
 
-
-
 .enhance-box span{
 
-    width:45px;
+    width:42px;
 
     text-align:right;
 
-    color:#64748b;
+    color:#6b7280;
+
+    font-size:13px;
 
 }
 
 
-
-
-
-/* =========================
-PREVIEW
-========================= */
-
+/* Preview */
 
 .preview-header{
 
@@ -477,8 +209,6 @@ PREVIEW
 
 }
 
-
-
 .preview-area{
 
     display:flex;
@@ -487,40 +217,31 @@ PREVIEW
 
     gap:20px;
 
-    margin-top:20px;
+    margin-top:15px;
 
 }
-
-
 
 .card{
 
     width:390px;
 
-    background:white;
-
     border:1px solid #ddd;
 
-    border-radius:12px;
+    border-radius:10px;
 
-    padding:12px;
+    background:white;
 
-    transition:.3s;
+    padding:10px;
+
+    transition:.25s;
 
 }
-
-
 
 .card:hover{
 
-    transform:translateY(-4px);
-
-    box-shadow:
-    0 8px 20px rgba(0,0,0,.12);
+    box-shadow:0 5px 18px rgba(0,0,0,.12);
 
 }
-
-
 
 .card canvas{
 
@@ -528,13 +249,11 @@ PREVIEW
 
     display:block;
 
-    border-radius:8px;
+    border-radius:5px;
 
     border:1px solid #333;
 
 }
-
-
 
 .filename{
 
@@ -548,64 +267,22 @@ PREVIEW
 
     font-size:14px;
 
+    word-break:break-all;
+
 }
-
-
 
 .delete{
 
-    color:red;
-
     cursor:pointer;
+
+    color:red;
 
     font-size:22px;
 
 }
 
 
-
-
-
-/* CAPTION */
-
-
-.caption-input{
-
-    width:100%;
-
-    margin-top:10px;
-
-    padding:10px;
-
-    border-radius:8px;
-
-    border:1px solid #d1d5db;
-
-    font-size:14px;
-
-    outline:none;
-
-}
-
-
-
-.caption-input:focus{
-
-    border-color:#2563eb;
-
-    box-shadow:
-    0 0 5px rgba(37,99,235,.25);
-
-}
-
-
-
-
-
-/* =========================
-DOWNLOAD BUTTONS
-========================= */
-
+/* Buttons */
 
 .bottom-buttons{
 
@@ -621,33 +298,27 @@ DOWNLOAD BUTTONS
 
 }
 
-
-
 button{
-
-    padding:14px 32px;
 
     border:none;
 
-    border-radius:10px;
+    border-radius:8px;
+
+    padding:14px 30px;
 
     font-size:16px;
 
     cursor:pointer;
 
-    transition:.3s;
+    transition:.25s;
 
 }
-
-
 
 button:hover{
 
-    transform:translateY(-3px);
+    transform:translateY(-2px);
 
 }
-
-
 
 #downloadAll{
 
@@ -657,8 +328,6 @@ button:hover{
 
 }
 
-
-
 #downloadZip{
 
     background:#16a34a;
@@ -667,19 +336,15 @@ button:hover{
 
 }
 
-
-
 #clearAll{
 
     background:white;
 
+    color:#333;
+
     border:1px solid #ccc;
 
 }
-
-
-
-
 
 .footer{
 
@@ -694,37 +359,15 @@ button:hover{
 }
 
 
-
-
-
-/* MOBILE */
-
+/* Responsive */
 
 @media(max-width:768px){
-
-
-.container{
-
-    width:95%;
-
-    padding:20px;
-
-}
-
 
 .card{
 
     width:100%;
 
 }
-
-
-.enhance-box{
-
-    width:100%;
-
-}
-
 
 .preview-header{
 
@@ -734,6 +377,19 @@ button:hover{
 
 }
 
+.enhance-box label{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+}
+
+.enhance-box span{
+
+    width:auto;
+
+}
 
 .bottom-buttons{
 
@@ -741,15 +397,34 @@ button:hover{
 
 }
 
-
 button{
 
     width:100%;
 
 }
 
+}
+.caption-input{
+
+    width:100%;
+
+    margin-top:10px;
+
+    padding:8px 10px;
+
+    border:1px solid #ddd;
+
+    border-radius:6px;
+
+    font-size:14px;
+
+    outline:none;
 
 }
-.empty-space{
-    height:0px;
+
+
+.caption-input:focus{
+
+    border-color:#2563eb;
+
 }
